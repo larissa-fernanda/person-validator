@@ -65,4 +65,52 @@ public class PersonDAOTest {
         List<String> errors = personDAO.isValidToInclude(person);
         assertTrue(errors.contains("O email deve estar no formato '_____@____._____'"), "Falha na validação do formato de email");
     }
+
+    @Test
+    public void testInvalidEmail2() {
+        Email email = new Email(1, "invalidemail@email");
+        ArrayList<Email> emails = new ArrayList<Email>();
+        emails.add(email);
+        Person person = new Person(1, "John Doe", 25, emails);
+        PersonDAO personDAO = new PersonDAO();
+
+        List<String> errors = personDAO.isValidToInclude(person);
+        assertTrue(errors.contains("O email deve estar no formato '_____@____._____'"), "Falha na validação do formato de email");
+    }
+
+    @Test
+    public void testInvalidEmail3() {
+        Email email = new Email(1, "invalidemail@.com");
+        ArrayList<Email> emails = new ArrayList<Email>();
+        emails.add(email);
+        Person person = new Person(1, "John Doe", 25, emails);
+        PersonDAO personDAO = new PersonDAO();
+
+        List<String> errors = personDAO.isValidToInclude(person);
+        assertTrue(errors.contains("O email deve estar no formato '_____@____._____'"), "Falha na validação do formato de email");
+    }
+
+    @Test
+    public void testInvalidEmail4() {
+        Email email = new Email(1, "@email.com");
+        ArrayList<Email> emails = new ArrayList<Email>();
+        emails.add(email);
+        Person person = new Person(1, "John Doe", 25, emails);
+        PersonDAO personDAO = new PersonDAO();
+
+        List<String> errors = personDAO.isValidToInclude(person);
+        assertTrue(errors.contains("O email deve estar no formato '_____@____._____'"), "Falha na validação do formato de email");
+    }
+
+    @Test
+    public void testInvalidEmail5() {
+        Email email = new Email(1, "invalidemail@email.");
+        ArrayList<Email> emails = new ArrayList<Email>();
+        emails.add(email);
+        Person person = new Person(1, "John Doe", 25, emails);
+        PersonDAO personDAO = new PersonDAO();
+
+        List<String> errors = personDAO.isValidToInclude(person);
+        assertTrue(errors.contains("O email deve estar no formato '_____@____._____'"), "Falha na validação do formato de email");
+    }
 }
